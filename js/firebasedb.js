@@ -1,4 +1,5 @@
 // Initialize Firebase
+
 var config = {
     apiKey: "AIzaSyD81iwuCfGQVC8_rhwNYRaJBadTfuZNDyI",
     authDomain: "gre-vocabulary-app.firebaseapp.com",
@@ -9,15 +10,10 @@ var config = {
 
 firebase.initializeApp(config);
 
-var n1 = "Hooo";
-var n2 = "Hi";
-
-function writeToDatabase(newWord, wordDef) {
-    // Todo : Fix duplicates
-
+function writeToDatabase(newUWord, wordDef) {
     // New word post data
     var postData = {
-        word        :   newWord,
+        word        :   newUWord,
         definition  :   wordDef
     };
 
@@ -31,4 +27,24 @@ function writeToDatabase(newWord, wordDef) {
     return firebase.database().ref().update(updates);
 } 
 
-writeToDatabase(n1, n2);
+window.addEventListener('load', function() {
+    console.log('Loaded');
+
+
+    var addWordForm = document.getElementById("addWord-form");
+    
+    addWordForm.onsubmit = function(e) {
+
+        console.log('Submitted new word');
+        var word    = document.getElementById('new_word').value;
+        var wordDef = document.getElementById('word_def').value;
+
+        if (word != '' && wordDef != '') {
+            writeToDatabase(word, wordDef);
+            console.log('Pushed new word');
+
+            document.getElementById('new_word').value   = '';
+            document.getElementById('word_def').value   = '';
+        }
+    };
+}, false);
