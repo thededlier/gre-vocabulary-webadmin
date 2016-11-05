@@ -29,15 +29,16 @@ function writeToDatabase(newUWord, wordDef) {
 } 
 
 function newWordAdd(word, definition) {
-    var html    =   document.createTextNode(
+    var html    =   
         '<div>' +
             '<h3>' + word + '</h3>' +
             '<p> Definition : ' + definition + '</p>' + 
         '</div>'
-    );
+    ;
 
     var div = document.createElement('div');
-    div.appendChild(html);
+    div.innerHTML = html;
+    var element = div.firstChild;
 
     document.body.insertBefore(div, document.getElementById('end'));
 }
