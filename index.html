@@ -6,30 +6,40 @@
         <script src="https://www.gstatic.com/firebasejs/3.5.3/firebase.js"></script>
         <!--<script src="https://www.gstatic.com/firebasejs/3.5.2/firebase-database.js"></script>-->
         <script src="./js/firebasedb.js"></script>
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
     </head>
 
     <body>
-        <h1> GRE Vocabulary Admin </h1>
-        <div>
-            <form id="addWord-form" action="#">
-                <div>
-                    New Word :
-                    <input type="text" id="new_word" />
-                </div>
 
-                <div>
-                    Definition :
-                    <input type="text" id="word_def" />
-                </div>
+        <div class="container" id="cont">
+            <h1> GRE Vocabulary Admin </h1>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <form  id="addWord-form" action="#">
+                        <div class="form-group">
+                            <label for="new_word"> New Word </label>
+                            <input type="text" class="form-control" id="new_word" />
+                        </div>
 
-                <button type="submit"> Add Word </button>
-            </form>
+                        <div class="form-group">
+                            <label for="word_def"> Definition </label>
+                            <input type="text" class="form-control" id="word_def" />
+                        </div>
+
+                        <button type="submit" class="btn btn-default"> Add Word </button>
+                    </form>
+                </div>
+            </div>
         </div>
 
         <div id="end">
 
         </div>
-
     </body>
 
 </html>

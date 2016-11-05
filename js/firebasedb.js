@@ -30,9 +30,13 @@ function writeToDatabase(newUWord, wordDef) {
 
 function newWordAdd(word, definition) {
     var html    =   
-        '<div>' +
-            '<h3>' + word + '</h3>' +
-            '<p> Definition : ' + definition + '</p>' + 
+        '<div class="container">' +
+            '<div class="row">' +
+                '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">' +
+                    '<h3>' + word + '</h3>' +
+                    '<p> Definition : ' + definition + '</p>' +
+                '</div>' +
+            '</div>' +
         '</div>'
     ;
 
