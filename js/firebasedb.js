@@ -10,6 +10,7 @@ var config = {
 
 firebase.initializeApp(config);
 
+//  write new word to database
 function writeToDatabase(newUWord, wordDef) {
     // New word post data
     var postData = {
@@ -27,12 +28,42 @@ function writeToDatabase(newUWord, wordDef) {
     return firebase.database().ref().update(updates);
 } 
 
+function newWordAdd(word, definition) {
+    var html    =   document.createTextNode(
+        '<div>' +
+            '<h3>' + word + '</h3>' +
+            '<p> Definition : ' + definition + '</p>' + 
+        '</div>'
+    );
+
+    var div = document.createElement('div');
+    div.appendChild(html);
+
+    document.body.insertBefore(div, document.getElementById('end'));
+}
+
+// On page load
 window.addEventListener('load', function() {
     console.log('Loaded');
 
+    var wordListRef =   firebase.database().ref('/wordlist/');
+    var addWordForm =   document.getElementById("addWord-form");
 
-    var addWordForm = document.getElementById("addWord-form");
-    
+    // Listen for changes and update
+    wordListRef.on('child_added', function(data) {
+        console.log(data);
+        newWordAdd(data.val().word, data.val().definition);
+    });
+
+    wordListRef.on('child_changed', function(data) {
+
+    });
+
+    wordListRef.on('child_removed', function(data) {
+
+    });
+
+    // Write word to wordlist
     addWordForm.onsubmit = function(e) {
 
         console.log('Submitted new word');
