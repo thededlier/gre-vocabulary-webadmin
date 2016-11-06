@@ -58,8 +58,7 @@ function updateWord(key, wordD, wordDef) {
     var updates = {};
     updates['/wordlist/' + key] = postData;
 
-    firebase.database().ref().update(updates);
-    // return firebase.database().ref('/wordlist/' + key + '/').update(updates);
+    return firebase.database().ref().update(updates);
 }
 
 function searchWord(word) {
