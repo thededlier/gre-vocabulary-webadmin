@@ -47,6 +47,21 @@ function newWordAdd(word, definition) {
     document.body.insertBefore(div, document.getElementById('end'));
 }
 
+function updateWord(key, wordD, wordDef) {
+    var wordListRef = firebase.database().ref('/');
+    
+    var postData = {
+        word        :   wordD,
+        definition  :   wordDef
+    };
+    
+    var updates = {};
+    updates['/wordlist/' + key] = postData;
+
+    firebase.database().ref().update(updates);
+    // return firebase.database().ref('/wordlist/' + key + '/').update(updates);
+}
+
 function searchWord(word) {
     var wordListRef = firebase.database().ref('/');
     var wordKey;
@@ -109,6 +124,7 @@ window.addEventListener('load', function() {
             console.log('Key : ' + key);
             console.log('Pushed word changes');
 
+            updateWord(key, word.value, wordDef.value);
             document.getElementById('update-word').value   = '';
             document.getElementById('update-word-def').value   = '';
         }
