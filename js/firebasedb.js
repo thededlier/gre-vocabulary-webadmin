@@ -32,9 +32,9 @@ function newWordAdd(word, definition) {
     var html    =   
         '<div class="container">' +
             '<div class="row">' +
-                '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">' +
-                    '<h3>' + word + '</h3>' +
-                    '<p> Definition : ' + definition + '</p>' +
+                '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="wordlist-' + word + '">' +
+                    '<h3 id="' + word + '">' + word + '</h3>' +
+                    '<p id="' + word + '-def"> Definition : ' + definition + '</p>' +
                 '</div>' +
             '</div>' +
         '</div>'
@@ -88,7 +88,8 @@ window.addEventListener('load', function() {
     });
 
     wordListRef.on('child_changed', function(data) {
-
+        var wordDef = document.getElementById(data.val().word + '-def');
+        wordDef.innerHTML = data.val().definition;
     });
 
     wordListRef.on('child_removed', function(data) {
