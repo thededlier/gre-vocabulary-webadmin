@@ -61,6 +61,10 @@ function updateWord(key, wordD, wordDef) {
     return firebase.database().ref().update(updates);
 }
 
+function deleteWord(key) {
+    firebase.database().ref('/wordlist/').child(key).remove();
+}
+
 function searchWord(word) {
     var wordListRef = firebase.database().ref('/');
     var wordKey;
@@ -122,11 +126,25 @@ window.addEventListener('load', function() {
             
             var key = searchWord(word.value);
             console.log('Key : ' + key);
-            console.log('Pushed word changes');
-
+            
             updateWord(key, word.value, wordDef.value);
             document.getElementById('update-word').value   = '';
             document.getElementById('update-word-def').value   = '';
+
+            console.log('Pushed word changes');
         }
-    }
+    };
+
+    deleteWordForm.onsubmit = function(e) {
+        console.log('Attempting to delete word');
+        var word    =   document.getElementById('delete-word');
+        if (word != '') {
+            var key = searchWord(word.value);
+            console.log('Key : ' + key);
+
+            deleteWord(key);
+            document.getElementById('delete-word').value    = '';
+            console.log('Deleted word');
+        }
+    };
 }, false);
