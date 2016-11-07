@@ -28,9 +28,9 @@ function writeToDatabase(newUWord, wordDef) {
     return firebase.database().ref().update(updates);
 } 
 
-function newWordAdd(word, definition) {
+function newWordAdd(key, word, definition) {
     var html    =   
-        '<div class="container">' +
+        '<div class="container" id="container-' + key + '">' +
             '<div class="row">' +
                 '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="wordlist-' + word + '">' +
                     '<h3 id="' + word + '">' + word + '</h3>' +
@@ -88,7 +88,7 @@ window.addEventListener('load', function() {
 
     // Listen for changes and update
     wordListRef.on('child_added', function(data) {
-        newWordAdd(data.val().word, data.val().definition);
+        newWordAdd(data.key, data.val().word, data.val().definition);
     });
 
     wordListRef.on('child_changed', function(data) {
@@ -97,7 +97,8 @@ window.addEventListener('load', function() {
     });
 
     wordListRef.on('child_removed', function(data) {
-
+        var wordContainer = document.getElementById('container-' + data.key);
+        wordContainer.innerHTML = '';
     });
 
     // Write word to wordlist
